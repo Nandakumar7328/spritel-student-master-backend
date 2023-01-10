@@ -203,6 +203,28 @@ app.get('/get/student/name/:id',async(request,response)=> {
     }
 })
 
+app.get('/get/master/accout/:id',async(request,response)=> {
+    const {id} = request.params
+    try{
+        const oneMaster = await Master.find({id:id})
+        response.send(oneMaster)
+    }
+    catch(err){
+        console.log(err.message)
+    }
+})
+
+app.get('/get/student/account/:id',async(request,response)=> {
+    const {id} = request.params
+    try{
+        const oneStudent = await Student.find({id:id})
+        response.send(oneStudent)
+    }
+    catch(err){
+        console.log(err.message)
+    }
+})
+
 
 
 

@@ -76,3 +76,9 @@ GET http://localhost:3010/get/master/name/1
 ### 
 GET http://localhost:3010/get/student/name/1 
 
+### 
+GET http://localhost:3010/get/master/accout/1
+
+### 
+GET http://localhost:3010/get/student/account/1
+
