@@ -173,7 +173,7 @@ app.get('/get/master/question/:id',async(request,response)=> {
     const {id} = request.params
     console.log(id)
     try{
-        const oneMasterQuestion = await MasterQuestions.find({id:id})
+        const oneMasterQuestion = await MasterQuestions.find({masterId:id})
         response.send(oneMasterQuestion)
     }
     catch(err){
