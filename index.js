@@ -11,7 +11,7 @@ app.use(cors())
 mongoose.connect('mongodb+srv://NandaKumar:Nanda7328@cluster0.9j7nchf.mongodb.net/?retryWrites=true&w=majority').then(
     () => console.log("DB Connected .....!")
 ).catch(err => console.log(err,"DB"))
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3010
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
@@ -185,7 +185,7 @@ app.get('/get/master/name/:id',async(request,response)=> {
     const {id} = request.params
     try{
         const oneMaster = await Master.find({id:id})
-        response.send(oneMaster.map(each => each.username))
+        response.send(oneMaster.map(each => ({name:each.username})))
     }
     catch(err){
         console.log(err.message)
@@ -196,7 +196,7 @@ app.get('/get/student/name/:id',async(request,response)=> {
     const {id} = request.params
     try{
         const oneStudent = await Student.find({id:id})
-        response.send(oneStudent.map(each => each.username))
+        response.send(oneStudent.map(each => ({name:each.username})))
     }
     catch(err){
         console.log(err.message)
