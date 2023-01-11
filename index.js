@@ -5,7 +5,6 @@ const app = express()
 const Master = require('./model')
 const Student = require('./modelStudent')
 const MasterQuestions = require('./modelMasterQuestion')
-const StudentAnswer = require('./modelStudentAnswer')
 app.use(express.json())
 app.use(cors())
 mongoose.connect('mongodb+srv://NandaKumar:Nanda7328@cluster0.9j7nchf.mongodb.net/?retryWrites=true&w=majority').then(
@@ -136,33 +135,10 @@ catch(err){
 }
 })
 
-app.post('/student-answer/send',async(request,response) => {
-    const {id,question,studentId,studentName,answer} = request.body 
-    try{
-        const newData = new StudentAnswer({id,question,studentId,studentName,answer})
-        await newData.save()
-        const output = {status:true,msg:"Answer sent"}
-        response.send(output)
-} 
-catch(err){
-    console.log(err.message)
-}
-})
-
 app.get('/all/questions',async(request,response)=> {
     try{
         const allQuestions = await MasterQuestions.find()
         response.send(allQuestions)
-    }
-    catch(err){
-        console.log(err.message)
-    }
-})
-
-app.get('/all/answers',async(request,response)=> {
-    try{
-        const allAnswer = await StudentAnswer.find()
-        response.send(allAnswer)
     }
     catch(err){
         console.log(err.message)
@@ -186,17 +162,6 @@ app.get('/get/master/name/:id',async(request,response)=> {
     try{
         const oneMaster = await Master.find({id:id})
         response.send(oneMaster.map(each => ({name:each.username})))
-    }
-    catch(err){
-        console.log(err.message)
-    }
-})
-
-app.get('/get/student/name/:id',async(request,response)=> {
-    const {id} = request.params
-    try{
-        const oneStudent = await Student.find({id:id})
-        response.send(oneStudent.map(each => ({name:each.username})))
     }
     catch(err){
         console.log(err.message)
